@@ -5,12 +5,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { DeleteConfirmation } from './DeleteConfirmation';
+import { Inter } from 'next/font/google';
 
 type CardProps = {
   event: IEvent;
   hasOrderLink?: boolean;
   hidePrice?: boolean;
 };
+
+const inter = Inter({ subsets: ['latin'] });
 
 export default function Card({ event, hasOrderLink, hidePrice }: CardProps) {
   const { sessionClaims } = auth();
@@ -46,7 +49,12 @@ export default function Card({ event, hasOrderLink, hidePrice }: CardProps) {
         {!hidePrice && (
           <div className="flex gap-2">
             <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60">
-              {event.isFree ? 'FREE' : `$${event.price}`}
+              {event.isFree ? 'FREE' : (
+                      <>
+                        <span className={inter.className}>₹</span>
+                        {event.price}
+                      </>
+                    )}
             </span>
             <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
               {event.category.name}
