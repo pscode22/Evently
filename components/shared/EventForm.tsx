@@ -108,7 +108,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
       }
     }
   }
-  console.log(event);
   return (
     <Form {...form}>
       <form
