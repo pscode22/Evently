@@ -53,6 +53,8 @@ export async function POST(req: Request) {
   // Get the ID and type
   // const { id } = evt.data;
   const eventType = evt.type;
+
+  console.log(eventType, evt)
  
   // User creation webhook.
   if(eventType === 'user.created') {
@@ -68,8 +70,10 @@ export async function POST(req: Request) {
     }
 
     const newUser = await createUser(user);
+    console.log(newUser, 'after-create-user-fetch')
 
     if(newUser) {
+      console.log('metadata', newUser)
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
           userId: newUser._id
